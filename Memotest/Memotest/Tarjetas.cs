@@ -10,6 +10,7 @@ namespace Memotest
     class Tarjetas
     {
         public string foto { get; set; }
+        public int id { get; set; }
         public int pareja{ get; set; }
         public int nivel{ get; set; }
         private OleDbConnection Conn;
@@ -29,8 +30,9 @@ namespace Memotest
             while (traido.Read())
             {
                 Tarjetas tarje = new Tarjetas();
-                tarje.pareja= Convert.ToInt32(traido["IdJugador"]);
-                tarje.foto = traido["Nombre"].ToString();
+                tarje.id = Convert.ToInt32(traido["Id"]);
+                tarje.pareja= Convert.ToInt32(traido["Pareja"]);
+                tarje.foto = traido["Foto"].ToString();
                 tarje.nivel = Convert.ToInt32(traido["Nivel"]);
                 lista.Add(tarje);
             }
