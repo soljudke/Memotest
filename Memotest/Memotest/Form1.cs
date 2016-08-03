@@ -52,67 +52,60 @@ namespace Memotest
             fondos = new PictureBox[listTarjetas.Count()];
             for (int i2 = 0; i2 < listTarjetas.Count(); i2++)
             {
+                fondos[i2] = new PictureBox();
+                fondos[i2].Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "tarjAtras.jpg");
+                fondos[i2].AutoSize = true;
+            
+                fondos[i2].BackColor = Color.Transparent;
+                fondos[i2].Click += new EventHandler(fondos_Click);
+                fondos[i2].Name = listTarjetas[i2].id.ToString();
+                fondos[i2].BringToFront();
+                //posRandom.Add(y);
+             
+               
                 if (i2 >= 0 && i2 < 6)
                 {
-                    fondos[i2] = new PictureBox();
-                    fondos[i2].Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "tarjAtras.jpg");
-                    fondos[i2].AutoSize = true;
-                    fondos[i2].Click += new EventHandler(fondos_Click);
-                    fondos[i2].BackColor = Color.Transparent;
+                    
                     fondos[i2].Location = new Point(s, 94);
-                    fondos[i2].Name = listTarjetas[i2].id.ToString();
-                    fondos[i2].BringToFront();
-                    //posRandom.Add(x);
                     s = fondos[i2].Right + 55;
-                    this.Controls.Add(fondos[i2]);
                 }
                 if (i2 >= 6 && i2 < listTarjetas.Count())
                 {
 
-                    fondos[i2] = new PictureBox();
-                    fondos[i2].Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "tarjAtras.jpg");
-                    fondos[i2].AutoSize = true;
-                    fondos[i2].BackColor = Color.Transparent;
+                   
                     fondos[i2].Location = new Point(j, 340);
-                    fondos[i2].Click += new EventHandler(fondos_Click);
-                    fondos[i2].Name = listTarjetas[i2].id.ToString();
-                    fondos[i2].BringToFront();
-                    //posRandom.Add(y);
-                    j = fondos[i2].Right + 55;
-                    this.Controls.Add(fondos[i2]);
+                      j = fondos[i2].Right + 55;
                 }
+                this.Controls.Add(fondos[i2]);
             }
             for (int i = 0; i < listTarjetas.Count(); i++)
              {
-                 if (i >= 0 && i < 6)
+
+                PictureBox estaPic = new PictureBox();
+                estaPic.Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + listTarjetas[i].foto);
+                estaPic.AutoSize = true;
+                estaPic.Click += new EventHandler(pictures_Click);
+                estaPic.BackColor = Color.Transparent;
+                estaPic.SendToBack();
+                estaPic.Name = listTarjetas[i].id.ToString();
+                posRandom.Add(x);
+                if (i >= 0 && i < 6)
                  {
-                     pictures[i] = new PictureBox();
-                     pictures[i].Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + listTarjetas[i].foto);
-                     pictures[i].AutoSize = true;
-                     pictures[i].Click += new EventHandler(pictures_Click);
-                     pictures[i].BackColor = Color.Transparent;
-                     pictures[i].Location = new Point(x, 94);
-                    pictures[i].SendToBack();
-                     pictures[i].Name = listTarjetas[i].id.ToString();
-                     posRandom.Add(x);
-                     x = pictures[i].Right + 55;
-                     this.Controls.Add(pictures[i]);
+
+                    estaPic.Location = new Point(x, 94);
+                    
+                     x = estaPic.Right + 55;
+                     
                  }
                  if (i >= 6 && i < listTarjetas.Count())
                  {
-
-                     pictures[i] = new PictureBox();
-                     pictures[i].Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + listTarjetas[i].foto);
-                     pictures[i].AutoSize = true;
-                     pictures[i].BackColor = Color.Transparent;
-                     pictures[i].Location = new Point(y, 340);
-                     pictures[i].Click += new EventHandler(pictures_Click);
-                     pictures[i].Name = listTarjetas[i].id.ToString();
-                    pictures[i].SendToBack();
-                    posRandom.Add(y);
-                     y = pictures[i].Right + 55;
-                     this.Controls.Add(pictures[i]);
+                    estaPic.Location = new Point(y, 340);
+                     
+                     y = estaPic.Right + 55;
+                     
                 }
+                this.Controls.Add(estaPic);
+                pictures[i]= estaPic;
             }
             /* 
 
@@ -141,7 +134,8 @@ namespace Memotest
         }
         protected void pictures_Click(object sender, EventArgs e)
         {
-            var pic = sender as PictureBox;
+            PictureBox pic = sender as PictureBox;
+            pic =null;
             /*for (int i = 0; i < listTarjetas.Count(); i++)
             {
                 if (pic != null && pic.Name == pictures[i].Name)
@@ -173,7 +167,8 @@ namespace Memotest
                 }
             }*/
         }
-            
+
+        PictureBox picAnterior;
             protected void fondos_Click(object sender, EventArgs e)
             {
             var pic = sender as PictureBox;
@@ -185,6 +180,8 @@ namespace Memotest
                     {
                         ParejaActual = listTarjetas[i].pareja;
                         CantClick = 1;
+                        primerI = i;
+                        picAnterior = pic;
                         pic.Visible = false;
 
                     }
@@ -193,19 +190,19 @@ namespace Memotest
                         pic.Visible = false;
                         if (ParejaActual == listTarjetas[i].pareja)
                         {
-                            MessageBox.Show("hola");
+                            MessageBox.Show("Si");
                             CantClick = 0;
-                            pic.Dispose();
-                            fondos[primerI].Dispose();
-                            pictures[primerI].Dispose();
-                            pictures[i].Dispose();
-
+                            
+                            pictures[primerI].Visible = false;
+                            pictures[i].Visible = false;
+ 
                         }
                         else
                         {
-                            MessageBox.Show("puto");
+                            MessageBox.Show("No");
                             CantClick = 0;
                             pic.Visible = true;
+                            picAnterior.Visible = true;
                             fondos[primerI].Visible = true;
                         }
                     }
