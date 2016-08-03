@@ -33,7 +33,7 @@ namespace Memotest
             switch (estado)
             {
                 case "Ganaste":
-                    pictureBox1.Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "IMGS/IMGS ARMANDO/feliz.png");
+                    pictureBox1.Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "/feliz.png");
                     btnOk.Visible = false;
                     btnSi.Visible = true;
                     btnNo.Visible = true;
@@ -41,7 +41,7 @@ namespace Memotest
                     label2.Text = "¿Jugamos de nuevo?";
                     break;
                 case "Perdiste":
-                    pictureBox1.Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "IMGS/IMGS ARMANDO/triste.png");
+                    pictureBox1.Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "/triste.png");
                     btnOk.Visible = false;
                     btnSi.Visible = true;
                     btnNo.Visible = true;
@@ -49,7 +49,7 @@ namespace Memotest
                     label2.Text = "¿Intentamos de nuevo?";
                     break;
                 case "Nivel":
-                    pictureBox1.Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "IMGS/IMGS ARMANDO/aplausos.gif");
+                    pictureBox1.Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "/aplausos.gif");
                     btnNo.Visible = false;
                     btnSi.Visible = false;
                     btnOk.Visible = true;
@@ -57,7 +57,7 @@ namespace Memotest
                     label2.Text = "Pasaste al segundo nivel";
                     break;
                 case "Silabas":
-                    pictureBox1.Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "IMGS/IMGS ARMANDO/aplausos.gif");
+                    pictureBox1.Image = System.Drawing.Image.FromFile(Configuracion.RootFolder + "/aplausos.gif");
                     btnNo.Visible = false;
                     btnSi.Visible = false;
                     btnOk.Visible = true;

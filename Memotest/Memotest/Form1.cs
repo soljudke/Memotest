@@ -169,9 +169,12 @@ namespace Memotest
         }
 
         PictureBox picAnterior;
+        PictureBox img;
+        PictureBox imgAnterior;
             protected void fondos_Click(object sender, EventArgs e)
             {
             var pic = sender as PictureBox;
+            img = pictures.FirstOrDefault(p => p.Name==pic.Name);            
             for (int i = 0; i < listTarjetas.Count(); i++)
             {
                 if (pic != null && pic.Name == fondos[i].Name)
@@ -182,6 +185,7 @@ namespace Memotest
                         CantClick = 1;
                         primerI = i;
                         picAnterior = pic;
+                        imgAnterior = img;
                         pic.Visible = false;
 
                     }
@@ -190,19 +194,18 @@ namespace Memotest
                         pic.Visible = false;
                         if (ParejaActual == listTarjetas[i].pareja)
                         {
-                            MessageBox.Show("Si");
                             CantClick = 0;
-                            pictures[primerI].Visible = false;
-                            pictures[i].Visible = false;
- 
+                            img.Visible=false;                            
+                            imgAnterior.Visible=false;
+                            Application.DoEvents();
+                            //MessageBox.Show("Si");
                         }
                         else
                         {
-                            MessageBox.Show("No");
+                            //MessageBox.Show("No");
                             CantClick = 0;
                             pic.Visible = true;
-                            picAnterior.Visible = true;
-                            fondos[primerI].Visible = true;
+                            picAnterior.Visible = true;                                                       
                         }
                     }
 
