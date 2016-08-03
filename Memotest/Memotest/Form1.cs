@@ -192,7 +192,6 @@ namespace Memotest
                         {
                             MessageBox.Show("Si");
                             CantClick = 0;
-                            
                             pictures[primerI].Visible = false;
                             pictures[i].Visible = false;
  
